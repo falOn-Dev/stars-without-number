@@ -1,0 +1,264 @@
+{
+  "main": {
+    "id": "559ba9eeb4545d10",
+    "type": "split",
+    "children": [
+      {
+        "id": "5cd18351d3444135",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7e3b831d6b31337b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Templates/Test.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Test"
+            }
+          },
+          {
+            "id": "5a734435e1781c83",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Templates/Encounter.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Encounter"
+            }
+          },
+          {
+            "id": "ed71f74f17eb0a2c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Templates/Ship.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Ship"
+            }
+          },
+          {
+            "id": "e5da8b1d260916cb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Echoes Expanse/R01-01.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "R01-01"
+            }
+          },
+          {
+            "id": "da935c3ec1329038",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Echoes Expanse/Grahslagg Mining Corporation.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Grahslagg Mining Corporation"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "83b1e101cf500dc0",
+    "type": "split",
+    "children": [
+      {
+        "id": "db8faf0fd91f9b63",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c256853af2f2c963",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "cce404ec460bc788",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "3ea8e3ffa8fa78dc",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "8fd5c6828ba378c1",
+    "type": "split",
+    "children": [
+      {
+        "id": "542f35701a60dc40",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e9b2956e2a1b8f82",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "b6ce571b14208230",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "480a9ee0cdc9cfd2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "87e10796bf9dfe30",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "templater-obsidian:Templater": false
+    }
+  },
+  "active": "ed71f74f17eb0a2c",
+  "lastOpenFiles": [
+    "Templates/Item.md",
+    "Templates/Ship.md",
+    "Templates/Quest.md",
+    "Templates/NPC.md",
+    "Templates/Encounter.md",
+    "Test Encounter.md",
+    "Echoes Expanse/The House.md",
+    "Echoes Expanse/Reltudan.md",
+    "Echoes Expanse/Groxxes.md",
+    "Templates/Alien.md",
+    "Untitled 1.md",
+    "Templates/Monster.md",
+    "Echoes Expanse/Goblin.md",
+    "Templates/Planet.md",
+    "Echoes Expanse/R01-01.md",
+    "Templates/Moon.md",
+    "Scripts/insertCombatant.js",
+    "Templates/System.md",
+    "Scripts/insertCombatant.js.txt",
+    "Scripts/New Text Document.txt",
+    "Scripts",
+    "Echoes Expanse/Verbillion.md",
+    "Echoes Expanse/Ordance Station.md",
+    "Echoes Expanse/Hawzek.md",
+    "Echoes Expanse/Grahslagg Station.md",
+    "Echoes Expanse/Grahslagg Mining Corporation.md",
+    "Echoes Expanse/Dwarf.md",
+    "Echoes Expanse/Ante.md",
+    "Gold Rush Distress.md",
+    "Templates/Faction.md",
+    "StarsWithoutNumberRevised-DeluxeEdition-011418.pdf",
+    "Echoes Expanse",
+    "Templates",
+    "Groxxes",
+    "Sector"
+  ]
+}
