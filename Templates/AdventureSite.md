@@ -1,7 +1,5 @@
 ---
-tags:
-  - swn
-  - adventure-site
+tags: [swn, adventure-site]
 title: <% tp.file.title %>
 type: site
 ---
