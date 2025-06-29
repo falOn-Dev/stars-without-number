@@ -1,5 +1,7 @@
 ---
-tags: [swn, npc]
+tags:
+	- swn
+	- npc
 title: <% tp.file.title %>
 type: npc
 ---

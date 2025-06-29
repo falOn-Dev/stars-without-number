@@ -1,5 +1,7 @@
 ---
-tags: [swn, system]
+tags:
+	- swn
+	- system
 title: <% tp.file.title %>
 type: system
 ---

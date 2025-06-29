@@ -1,5 +1,7 @@
 ---
-tags: [swn, planet]
+tags:
+	- swn
+	- planet
 title: <% tp.file.title %>
 type: planet
 ---

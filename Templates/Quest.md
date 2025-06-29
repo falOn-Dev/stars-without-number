@@ -1,7 +1,9 @@
 ---
 title: <% tp.file.title %>
 type: quest
-tags: [swn, quest]
+tags:
+	- swn
+	- quest
 ---
 
 <%*
@@ -34,7 +36,7 @@ _What is the goal of this quest? What completes it?_
 
 ## Steps or Phases
 
-- 
+- [ ]
 
 ## Related NPCs
 

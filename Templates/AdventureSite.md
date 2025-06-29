@@ -1,10 +1,5 @@
----
-tags: [swn, adventure-site]
-title: <% tp.file.title %>
-type: site
----
-
 <%*
+// Gather prompts
 let location = await tp.system.prompt("Located on or orbiting what world/station?")
 
 let type = await tp.system.suggester(
@@ -14,7 +9,7 @@ let type = await tp.system.suggester(
   ],
   [
     "Ancient Ruin", "Pretech Facility", "Alien Structure", "Military Bunker", "Research Station",
-    "Temple", "Derelict Ship", "Vault", "Psychic Node", "City", "Other"
+    "Temple or Cult Site", "Derelict Ship", "Buried Vault", "Psychic Node", "City", "Other"
   ]
 )
 if (type === "Other") {
@@ -23,7 +18,7 @@ if (type === "Other") {
 
 let condition = await tp.system.suggester(
   ["Intact", "Partially Ruined", "Collapsed", "Hidden", "Shielded", "Corrupted"],
-  ["Intact", "Ruined", "Collapsed", "Hidden", "Shielded", "Corrupted"]
+  ["Intact", "Partially Ruined", "Collapsed", "Hidden", "Shielded", "Corrupted"]
 )
 
 let danger = await tp.system.suggester(
@@ -40,42 +35,55 @@ if (theme === "Other") {
 }
 
 let loot = await tp.system.prompt("What kind of loot/reward might be found?")
-let tags = await tp.system.prompt("Tags or descriptive keywords?")
+let extraTags = await tp.system.prompt("Additional descriptive tags (comma-separated)?")
 
 let factionInput = await tp.system.prompt("Factions involved or watching the site? (comma-separated)")
 let factionLinks = ""
-
 if (factionInput.trim() !== "") {
   let factionArray = factionInput.split(",").map(f => f.trim()).filter(f => f.length > 0)
   factionLinks = factionArray.map(f => `- [[${f}]]`).join("\n")
 }
 
+// Build namespaced tags
+let tagList = [
+  `site/type/${type.replace(/\s+/g, "_").toLowerCase()}`,
+  `site/theme/${theme.replace(/\s+/g, "_").toLowerCase()}`,
+  `site/condition/${condition.replace(/\s+/g, "_").toLowerCase()}`,
+  `site/danger/${danger.toLowerCase()}`
+]
 
-tR += `# 🗺️ Site: ${tp.file.title}
+if (extraTags.trim() !== "") {
+  tagList = tagList.concat(extraTags.split(",").map(t => `site/${t.trim().toLowerCase().replace(/\s+/g, "_")}`))
+}
 
-- Location: [[${location}]]
-- Type: ${type}
-- Condition: ${condition}
-- Danger Level: ${danger}
-- Theme: ${theme}
-- Tags: ${tags}
-- Potential Rewards: ${loot}
+// Build final note
+tR += `---
+tags:
+  - swn
+  - adventure-site
+  - ${tagList.join("\n  - ")}
+title: ${tp.file.title}
+type: site
+---
 
-## Factions Involved
-${factionLinks || "- None"}
+# 🗺️ Site: ${tp.file.title}
+
+- **Location:** [[${location}]]
+- **Type:** ${type}
+- **Condition:** ${condition}
+- **Danger Level:** ${danger}
+- **Theme:** ${theme}
+- **Potential Rewards:** ${loot}
+
+## Factions
+${factionLinks}
 
 ## Description
 
-## Entry Points & Layout
+## Hazards
 
-## Notable Features or Rooms
+## Secrets
 
-## Inhabitants or Threats
-
-## Secrets or Triggers
-
-## Hooks & Player Engagement
-
-## Notes
+## Plot Hooks
 `
 %>

@@ -1,12 +1,10 @@
----
-tags: [swn, faction]
-title: <% tp.file.title %>
-type: faction
----
 <%*
+// Gather prompts
 let scope = await tp.system.suggester(
   ["Planetary", "System-Spanning", "Sector-Wide", "Hidden Cell", "Extinct", "Nomadic Fleet"],
-  ["Planetary", "System", "Sector", "Cell", "Extinct", "Fleet"]
+  ["Planetary", "System-Spanning", "Sector-Wide", "Hidden Cell", "Extinct", "Nomadic Fleet"],
+  false,
+  "Select faction scope"
 )
 
 let type = await tp.system.suggester(
@@ -16,10 +14,12 @@ let type = await tp.system.suggester(
     "Academic Guild", "Alien Civilization", "Other"
   ],
   [
-    "Religious Cult", "Military", "Criminal", "Corporate",
-    "AI", "Pretech", "Rebellion", "Government",
-    "Academia", "Alien", "Other"
-  ]
+    "Religious Cult", "Military Force", "Criminal Syndicate", "Corporate Entity",
+    "AI/Machine Group", "Pretech Remnant", "Rebel Movement", "Governing Body",
+    "Academic Guild", "Alien Civilization", "Other"
+  ],
+  false,
+  "Select faction type"
 )
 
 if (type === "Other") {
@@ -35,54 +35,67 @@ let doctrine = await tp.system.prompt("Beliefs, rules, or ethos?")
 let speciesInput = await tp.system.prompt("Non-human species involved? (comma-separated, leave blank if none)")
 let speciesLinks = ""
 if (speciesInput.trim() !== "") {
-  let speciesArray = speciesInput.split(",").map(s => s.trim()).filter(s => s.length > 0)
-  speciesLinks = speciesArray.map(s => `- [[${s}]]`).join("\n")
+  let arr = speciesInput.split(",").map(s => s.trim()).filter(s => s.length > 0)
+  speciesLinks = arr.map(s => `- [[${s}]]`).join("\n")
 }
 
 let allyInput = await tp.system.prompt("Allies or client factions? (comma-separated)")
 let allyLinks = ""
 if (allyInput.trim() !== "") {
-  let allyArray = allyInput.split(",").map(a => a.trim()).filter(a => a.length > 0)
-  allyLinks = allyArray.map(a => `- [[${a}]]`).join("\n")
+  let arr = allyInput.split(",").map(a => a.trim()).filter(a => a.length > 0)
+  allyLinks = arr.map(a => `- [[${a}]]`).join("\n")
 }
 
 let enemyInput = await tp.system.prompt("Enemies or rivals? (comma-separated)")
 let enemyLinks = ""
 if (enemyInput.trim() !== "") {
-  let enemyArray = enemyInput.split(",").map(e => e.trim()).filter(e => e.length > 0)
-  enemyLinks = enemyArray.map(e => `- [[${e}]]`).join("\n")
+  let arr = enemyInput.split(",").map(e => e.trim()).filter(e => e.length > 0)
+  enemyLinks = arr.map(e => `- [[${e}]]`).join("\n")
 }
 
-tR += `# 🏛️ Faction: ${tp.file.title}
+let extraTags = await tp.system.prompt("Additional descriptive tags (comma-separated)?")
 
-- Scope: ${scope}
-- Type: ${type}
-- Base of Operations: [[${base}]]
-- Leadership: ${leader}
-- Goals: ${goals}
-- Methods: ${methods}
-- Doctrine: ${doctrine}
+// Build namespaced tags
+let tagList = [
+  `faction/scope/${scope.replace(/\s+/g, "_").toLowerCase()}`,
+  `faction/type/${type.replace(/\s+/g, "_").toLowerCase()}`
+]
 
+if (extraTags.trim() !== "") {
+  tagList = tagList.concat(extraTags.split(",").map(t => `faction/${t.trim().toLowerCase().replace(/\s+/g, "_")}`))
+}
+
+// Build final output
+tR += `---
+tags:
+  - swn
+  - faction
+  - ${tagList.join("\n  - ")}
+title: ${tp.file.title}
+type: faction
+---
+
+# 🏛️ Faction: ${tp.file.title}
+
+- **Scope:** ${scope}
+- **Type:** ${type}
+- **Base of Operations:** [[${base}]]
+- **Leadership:** ${leader}
+- **Goals:** ${goals}
+- **Methods:** ${methods}
+- **Doctrine:** ${doctrine}
 
 ## Non-Human Species Involved
-${speciesLinks || "- None"}
+${speciesLinks || "None"}
 
 ## Allies
-${allyLinks || "- None"}
+${allyLinks || "None"}
 
 ## Enemies
-${enemyLinks || "- None"}
+${enemyLinks || "None"}
 
 ## Description
 
-## Recent Activity
-
-## Assets or Holdings
-
-## Secrets or Hidden Agendas
-
-## Hooks for Players
-
-## Notes
+(Add narrative description, history, or notes here)
 `
 %>

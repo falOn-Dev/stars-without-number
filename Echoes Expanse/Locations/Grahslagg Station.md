@@ -1,7 +1,5 @@
 ---
-tags:
-  - swn
-  - station
+tags: [swn, station]
 title: Xyn Station
 type: station
 ---
@@ -12,7 +10,7 @@ type: station
 - Function: Mining Base
 - Status: Operational
 - Crew/Garrison: ~1000
-- Defenses: Xyn Mining Crews, Drone Defenses, Turrets
+- Defenses: Mining Crews, Drone Defenses, Turrets
 - Hazards: N/A
 
 ## Factions Present

@@ -16,6 +16,7 @@ type: system
 - None
 
 ## Adventure Hooks
+- [[A Salesman's Purgatory]]
 
 ## Notes
 

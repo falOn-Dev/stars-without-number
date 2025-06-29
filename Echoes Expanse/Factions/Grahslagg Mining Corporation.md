@@ -1,6 +1,8 @@
 ---
-tags: [swn, faction]
-title: Xyn Mining Corporation
+tags:
+  - swn
+  - faction
+title: Grahslagg Mining Corporation
 type: faction
 ---
 # 🏛️ Faction: Grahslagg Mining Corporation
