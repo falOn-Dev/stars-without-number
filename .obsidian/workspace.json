@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Templates/Planet.md",
+                "file": "RAW/Cyberware/Drone Control Link.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Planet"
+              "title": "Drone Control Link"
             }
           }
         ]
@@ -112,12 +112,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Templates/Planet.md",
+                "file": "RAW/Cyberware/Drone Control Link.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Planet"
+              "title": "Outgoing links from Drone Control Link"
             }
           },
           {
@@ -178,8 +178,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e2c8c8580069c642",
+  "active": "c256853af2f2c963",
   "lastOpenFiles": [
+    "RAW/Cyberware/Bioadaptation Augments.md",
+    "Templates/Planet.md",
+    "Templates/Templates V2.zip",
+    "Templates/Weapon.zip",
     "Templates/System.md",
     "RAW/WorldTags/Altered Humanity.md",
     "RAW/WorldTags/Zombies.md",
@@ -204,8 +208,6 @@
     "RAW/WorldTags/Sealed Menace.md",
     "RAW/WorldTags/Seagoing Cities.md",
     "RAW/WorldTags/Ritual Combat.md",
-    "RAW/WorldTags/Robots.md",
-    "RAW/WorldTags/Rising Hegemon.md",
     "RAW/WorldTags",
     "Scripts/world_tags.json",
     "Scripts/WorldTags",
@@ -213,8 +215,6 @@
     "Scripts/boiwatdahellboi.py",
     "Scripts/build_world_tags.py",
     "Scripts/generate_world_tags.py",
-    "RAW/Cyberware",
-    "Scripts/Cyberware",
-    "Scripts/generate_cyberware.py"
+    "RAW/Cyberware"
   ]
 }
