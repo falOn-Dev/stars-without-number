@@ -1,120 +1,140 @@
----
-tags:
-	- swn
-	- planet
-title: <% tp.file.title %>
-type: planet
----
-
 <%*
-let system = await tp.system.prompt("System")
+// Gather prompts
+let tagsInput = await tp.system.prompt("World tags (comma-separated, use exact tag note names to link)?")
 
 let atmosphere = await tp.system.suggester(
-	[
-		"Corrosive", "Inert", "Airless/Thin", "Breathable",
-		"Thick", "Invasive"
-	],
-	[
-		"Corrosive", "Inert", "Airless/Thin", "Breathable",
-		"Thick", "Invasive"
-	]
+  ["Airless", "Thin", "Breathable", "Thick", "Corrosive", "Inert gas", "Other"],
+  ["Airless", "Thin", "Breathable", "Thick", "Corrosive", "Inert gas", "Other"],
+  false,
+  "Select atmosphere type"
 )
+if (atmosphere === "Other") {
+  atmosphere = await tp.system.prompt("Enter custom atmosphere")
+}
 
-let temp = await tp.system.suggester(
-	[
-		"Frozen", "Cold", "Variable Cold-Temp",
-		"Temperate",
-		"Variable Warm-Temp", "Warm", "Burning"
-	],
-	[
-		"Frozen", "Cold", "Variable Cold-Temp",
-		"Temperate",
-		"Variable Warm-Temp", "Warm", "Burning"
-	]
+let temperature = await tp.system.suggester(
+  ["Frozen", "Cold", "Temperate", "Warm", "Hot"],
+  ["Frozen", "Cold", "Temperate", "Warm", "Hot"],
+  false,
+  "Select temperature"
 )
 
 let biosphere = await tp.system.suggester(
-	[
-		"Remnant", "Microbial", "None", "Human-miscible",
-		"Immiscible", "Hybrid", "Engineered"
-	],
-	[
-		"Remnant", "Microbial", "None", "Human-miscible",
-		"Immiscible", "Hybrid", "Engineered"
-	]
+  ["None", "Microbial life", "Minimal", "Human-compatible", "Overrun", "Exotic"],
+  ["None", "Microbial life", "Minimal", "Human-compatible", "Overrun", "Exotic"],
+  false,
+  "Select biosphere"
 )
 
-let pop = await tp.system.suggester(
-	[
-		"Failed Colony", "Outpost", "<1m", ">1m", ">100m", ">1b"
-	],
-	[
-		"Failed Colony", "Outpost", "Fewer than a million inhabitants", "Several million inhabitants", "Hundreds of millions of inhabitants", "Billions of inhabitants"
-	]
-)
-
+let population = await tp.system.prompt("Population description?")
 let tech = await tp.system.suggester(
-  ["TL0", "TL1", "TL2", "TL3", "TL4", "TL4+", "TL5"],
-  ["TL0", "TL1", "TL2", "TL3", "TL4", "TL4+", "TL5"]
+  ["TL0", "TL1", "TL2", "TL3", "TL4", "Pretech", "Postech Ruin"],
+  ["TL0", "TL1", "TL2", "TL3", "TL4", "Pretech", "Postech Ruin"],
+  false,
+  "Select tech level"
 )
 
-let specialties = ""
-if (tech === "TL4+") {
-  specialties = await tp.system.prompt("Enter Tech Specialties")
+let government = await tp.system.prompt("Government type?")
+let culture = await tp.system.prompt("Key cultural traits?")
+let hazards = await tp.system.prompt("Major hazards or challenges?")
+let controllingFaction = await tp.system.prompt("Primary controlling faction?")
+let otherFactionsInput = await tp.system.prompt("Other factions (comma-separated)?")
+let extraTags = await tp.system.prompt("Additional descriptive tags (comma-separated)?")
+
+// Law level dropdown
+let law = await tp.system.suggester(
+  [
+    "0: No law - anarchy, no restrictions",
+    "1: Minimal law - scattered enforcement",
+    "2: Lax law - only major crimes punished",
+    "3: Typical law - basic order, local police",
+    "4: Average law - standard restrictions, common enforcement",
+    "5: Strict law - notable weapon bans, routine surveillance",
+    "6: Harsh law - strong weapon bans, military patrols",
+    "7: Repressive law - heavy surveillance, weapon prohibition",
+    "8: Authoritarian law - strict controls, ID checks common",
+    "9: Totalitarian law - constant monitoring, harsh penalties",
+    "10: Absolute control - no tolerance for dissent, weaponry illegal"
+  ],
+  ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+  false,
+  "Select law level"
+)
+
+// Law level descriptions
+let lawDesc = {
+  "0": "No law - anarchy, no restrictions",
+  "1": "Minimal law - scattered enforcement",
+  "2": "Lax law - only major crimes punished",
+  "3": "Typical law - basic order, local police",
+  "4": "Average law - standard restrictions, common enforcement",
+  "5": "Strict law - notable weapon bans, routine surveillance",
+  "6": "Harsh law - strong weapon bans, military patrols",
+  "7": "Repressive law - heavy surveillance, weapon prohibition",
+  "8": "Authoritarian law - strict controls, ID checks common",
+  "9": "Totalitarian law - constant monitoring, harsh penalties",
+  "10": "Absolute control - no tolerance for dissent, weaponry illegal"
 }
 
-let tags = await tp.system.prompt("Enter Planet Tags:")
+// World tag links
+let worldTagLinks = tagsInput
+  ? tagsInput.split(",").map(t => `- [[${t.trim()}]]`).join("\n")
+  : "None"
 
-let poiInput = await tp.system.prompt("Landmarks or POIs? (comma-separated)")
-let poiLinks = ""
-if (poiInput.trim() !== "") {
-  let poiArray = poiInput.split(",").map(p => p.trim()).filter(p => p.length > 0)
-  poiLinks = poiArray.map(p => `- [[${p}]]`).join("\n")
+// Other faction links
+let otherFactionsLinks = otherFactionsInput
+  ? otherFactionsInput.split(",").map(f => `- [[${f.trim()}]]`).join("\n")
+  : "None"
+
+// Namespaced tags
+let tagList = [
+  `planet/atmosphere/${atmosphere.replace(/\s+/g, "_").toLowerCase()}`,
+  `planet/temp/${temperature.toLowerCase()}`,
+  `planet/biosphere/${biosphere.replace(/\s+/g, "_").toLowerCase()}`,
+  `planet/tech/${tech.replace(/\s+/g, "_").toLowerCase()}`
+]
+if (extraTags.trim() !== "") {
+  tagList = tagList.concat(extraTags.split(",").map(t => `planet/${t.trim().toLowerCase().replace(/\s+/g, "_")}`))
 }
 
-let orbitalsInput = await tp.system.prompt("Linked orbital bodies (moons, stations, etc)? (comma-separated)")
-let orbitalLinks = ""
-if (orbitalsInput.trim() !== "") {
-  let orbitalArray = orbitalsInput.split(",").map(o => o.trim()).filter(o => o.length > 0)
-  orbitalLinks = orbitalArray.map(o => `- [[${o}]]`).join("\n")
-}
+// Final output
+tR += `---
+title: ${tp.file.title}
+type: planet
+tags:
+  - swn
+  - planet
+  - ${tagList.join("\n  - ")}
+---
 
-let factionInput = await tp.system.prompt("Factions present on or around this planet? (comma-separated)")
-let factionLinks = ""
-if (factionInput.trim() !== "") {
-  let factionArray = factionInput.split(",").map(f => f.trim()).filter(f => f.length > 0)
-  factionLinks = factionArray.map(f => `- [[${f}]]`).join("\n")
-}
+# 🌍 Planet: ${tp.file.title}
 
-tR += `# 🪐 Planet: ${tp.file.title}
+- **World Tags:**  
+${worldTagLinks}
+- **Atmosphere:** ${atmosphere}
+- **Temperature:** ${temperature}
+- **Biosphere:** ${biosphere}
+- **Population:** ${population}
+- **Tech Level:** ${tech}
+- **Government:** ${government}
+- **Law Level:** ${law} (${lawDesc[law]})
+- **Cultural Traits:** ${culture}
+- **Hazards:** ${hazards}
+- **Controlling Faction:** ${controllingFaction ? `[[${controllingFaction}]]` : "None"}
 
-- System: [[${system}]]
-- Atmosphere: ${atmosphere}
-- Climate: ${temp}
-- Biosphere: ${biosphere}
-- Population: ${pop}
-- Tech Level: ${tech}
-`
+## Other Factions
+${otherFactionsLinks}
 
-if (specialties) {
-  tR += `- Tech Specialties: ${specialties}\n`
-}
+## Points of Interest
 
-tR += `- Tags: ${tags}
+(Add points of interest here)
+
+## Adventure Hooks
+
+(Add adventure hooks here)
 
 ## Description
 
-## Adventure Seeds
-
-## Landmarks/POIs
-${poiLinks || "- None"}
-
-## Orbital Bodies
-${orbitalLinks || "- None"}
-
-## Factions Present
-${factionLinks || "- None"}
-
-## Notes
+(Add detailed description here)
 `
 %>

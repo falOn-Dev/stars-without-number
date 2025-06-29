@@ -47,7 +47,7 @@ tags:
   - system_body
   - ${tagList.join("\n  - ")}
 title: ${tp.file.title}
-type: system_body
+type: ${bodyType}
 ---
 
 # 🌌 ${bodyType}: ${tp.file.title}
